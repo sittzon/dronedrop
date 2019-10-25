@@ -29,29 +29,47 @@ public class droneControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.touchCount > 0 || Input.get)
-        //{
-            // Touch controls or keyboard for debugging
-            if (Input.touchCount >= 1 || Input.GetKey(KeyCode.UpArrow))
+        // Touch controls
+        // Right side for up, left side for present drop
+
+        // Input.GetTouch(0).position returns position in device pixel coordinates, (0,0) in lower left corner
+        for (int i = 0; i < Input.touchCount; ++i)
         {
-            //Touch touch = Input.GetTouch(0);
-            //Vector2 pos = touch.position;
+            Touch touch = Input.GetTouch(i);
+            Vector2 touchPos = touch.position;
+            print(touchPos);
 
-            rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
+            // If touch is on right side
+            if (touchPos.x > Screen.currentResolution.width / 2)
+            {
+                rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
+            }
+            // If touch is on left side
+            else if (touchPos.x < Screen.currentResolution.width / 2)
+            {
+                Vector3 p = gameObject.transform.position;
+                Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
+                GameObject g = Instantiate(presentPrefab, new Vector3(p.x, p.y - 1.0f, p.z), Quaternion.identity);
+                g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
+            }
+
+            //// Touch controls or keyboard for debugging
+            //if (Input.touchCount == 1 || Input.GetKey(KeyCode.UpArrow))
+            //{
+            //    rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
+            //}
+            //if (Input.touchCount >= 2 || Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    Vector3 pos = gameObject.transform.position;
+            //    Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
+            //    GameObject g = Instantiate(presentPrefab, new Vector3(pos.x, pos.y-1.0f, pos.z), Quaternion.identity);
+            //    g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
+            //}
         }
-        if (Input.touchCount >= 2 || Input.GetKeyDown(KeyCode.Space))
-        {
-            Vector3 p = gameObject.transform.position;
-            Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
-            GameObject g = Instantiate(presentPrefab, new Vector3(p.x, p.y-1.0f, p.z), Quaternion.identity);
-            g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
-        }
-
-        //}
 
 
 
-        
+
 
         // Left/Right input
         float accX = Input.acceleration.x;
