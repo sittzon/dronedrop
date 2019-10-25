@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2297700594434151277}
   - component: {fileID: 2297700594434151279}
   - component: {fileID: -4638535629156299212}
+  - component: {fileID: 1157440294294989960}
   m_Layer: 0
   m_Name: city_bkg
   m_TagString: city_bkg
@@ -169,5 +170,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc2b44548d16a490d9e94d6b1e1ec608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1157440294294989960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297700594434151276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51c5013e92461453cbc7bf9c80cc3c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
