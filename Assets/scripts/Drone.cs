@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class droneControls : MonoBehaviour
+public class Drone : MonoBehaviour
 {
     public GameObject presentPrefab;
 
-    private Rigidbody2D rb;
-    private SpriteRenderer sr;
+    Rigidbody2D rb;
+    SpriteRenderer sr;
     float horizontalAccelerationForceConstant = 7.0f;
     float verticalAccelerationForceConstant = 10.0f;
     float maxVelXConstant = 3.0f;
     float halfScreenWidth;
     float halfScreenHeight;
+
+    int score;
 
     // Start is called before the first frame update
     void Start()
@@ -25,35 +27,22 @@ public class droneControls : MonoBehaviour
         rb.freezeRotation = true;
     }
 
-    private void goUp()
-    {
-        rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
-    }
-
-    private void dropPresent()
-    {
-        Vector3 p = gameObject.transform.position;
-        Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
-        GameObject g = Instantiate(presentPrefab, new Vector3(p.x, p.y - 1.0f, p.z), Quaternion.identity);
-        g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
-    }
-
     // Update is called once per frame
     void Update()
     {
         // Touch controls
-        // Right side for up, left side for present drop
+        // Left side for up, right side for present drop
         for (int i = 0; i < Input.touchCount; ++i)
         {
             Vector2 touchPos = Input.GetTouch(i).position;
 
-            // If touch is on right side
-            if (touchPos.x > Screen.currentResolution.width / 2)
+            // If touch is on left side
+            if (touchPos.x < Screen.currentResolution.width / 2)
             {
                 goUp();
             }
-            // If touch is on left side
-            else if (touchPos.x < Screen.currentResolution.width / 2 && Input.GetTouch(i).phase == TouchPhase.Began)
+            // If touch is on right side
+            else if (touchPos.x > Screen.currentResolution.width / 2 && Input.GetTouch(i).phase == TouchPhase.Began)
             {
                 dropPresent();
             }
@@ -112,6 +101,29 @@ public class droneControls : MonoBehaviour
             gameObject.transform.position = new Vector2(pos.x, -halfScreenHeight + sr.bounds.extents.y);
             rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
+    }
+
+    void goUp()
+    {
+        rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
+    }
+
+    void dropPresent()
+    {
+        Vector3 p = gameObject.transform.position;
+        Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
+        GameObject g = Instantiate(presentPrefab, new Vector3(p.x, p.y - 1.0f, p.z), Quaternion.identity);
+        g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
+    }
+
+    public void setScore(int score)
+    {
+        this.score = score;
+    }
+
+    public int getScore()
+    {
+        return this.score;
     }
 }
 

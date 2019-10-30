@@ -7,6 +7,8 @@ TagManager:
   - city_bkg
   - cloud
   - house
+  - chimney
+  - pointText
   layers:
   - Default
   - TransparentFX

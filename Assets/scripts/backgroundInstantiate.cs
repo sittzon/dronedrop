@@ -2,33 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class backgroundInstantiate : MonoBehaviour
+public class BackgroundInstantiate : MonoBehaviour
 {
     public GameObject cityPrefab;
     public GameObject cloudPrefab;
     public GameObject housePrefab1;
 
-    private Vector2 cityStartPos = new Vector2(14f, -2.45f);
-    private Vector2 cloudStartPos = new Vector2(9.6f, 0f);
-    private Vector2 house1StartPos = new Vector2(11.2f, -0.5f);
+    Vector2 cityStartPos = new Vector2(14f, -2.45f);
+    Vector2 cloudStartPos = new Vector2(9.6f, 0f);
+    Vector2 house1StartPos = new Vector2(11.2f, -0.5f);
 
     int cityLastCreated;
     int cloudLastCreated;
     int house1LastCreated;
 
-    float halfScreenWidth;
+    SpriteRenderer sr;
+    float spriteHalfWidth, spriteHalfHeight;
+
+    float screenHalfWidth;
 
     // Start is called before the first frame update
     void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        halfScreenWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
+        screenHalfWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
+
+        sr = gameObject.GetComponent<SpriteRenderer>();
+        spriteHalfWidth = sr.sprite.bounds.extents.x;
+        spriteHalfHeight = sr.sprite.bounds.extents.y;
 
         for (int i = 0; i < 15; ++i)
         {
             GameObject g = instantiateCloud();
-            g.transform.position += new Vector3((Random.value - 0.5f) * 4*halfScreenWidth, 0f, 0f);
+            g.transform.position += new Vector3((Random.value - 0.5f) * 4*screenHalfWidth, 0f, 0f);
         }
     }
 
