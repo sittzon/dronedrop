@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - city_bkg
+  - cloud
+  - house
   layers:
   - Default
   - TransparentFX

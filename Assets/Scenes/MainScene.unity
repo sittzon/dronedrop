@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -354,6 +355,7 @@ GameObject:
   - component: {fileID: 424170759}
   - component: {fileID: 424170758}
   - component: {fileID: 424170757}
+  - component: {fileID: 424170761}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -441,6 +443,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!222 &424170761
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424170756}
+  m_CullTransparentMesh: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +462,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
@@ -469,18 +478,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
---- !u!114 &519420030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbcf7a1fb9d6e46c194604b2e4c101fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -550,7 +547,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ed321801dd24b7382f349ab87cfb0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bkgPrefab: {fileID: 2297700594434151276, guid: f32a9e58c62c140c2af267d93bd9de73,
+  cityPrefab: {fileID: 2297700594434151276, guid: f32a9e58c62c140c2af267d93bd9de73,
+    type: 3}
+  cloudPrefab: {fileID: 6677033157039995718, guid: f0122ab0e2d18403c8b162793fec3477,
+    type: 3}
+  housePrefab1: {fileID: 1431710497835692575, guid: ae33c174a8fe44e00b9965462caa4aef,
     type: 3}
 --- !u!1001 &1579585619
 PrefabInstance:
@@ -634,6 +635,7 @@ GameObject:
   - component: {fileID: 2006487295}
   - component: {fileID: 2006487296}
   - component: {fileID: 2006487297}
+  - component: {fileID: 2006487298}
   m_Layer: 0
   m_Name: drone
   m_TagString: Untagged
@@ -655,6 +657,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -790,3 +793,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   presentPrefab: {fileID: 8479366047328370566, guid: 88983b191e5c14cad95efc06d27fdc09,
     type: 3}
+--- !u!95 &2006487298
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006487292}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03077088ecbf14cc7a3a0b9d158bb5bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

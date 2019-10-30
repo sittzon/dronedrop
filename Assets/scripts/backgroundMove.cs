@@ -4,12 +4,31 @@ using UnityEngine;
 
 public class backgroundMove : MonoBehaviour
 {
+    private float minSpeed, variability;
     private float movementSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        movementSpeed = Random.value/10f;
+        movementSpeed = Random.value;   // [0 - 1]
+
+        if (gameObject.tag == "cloud")
+        {
+            minSpeed = 0.05f;
+            variability = 0.02f;
+        }
+        else if (gameObject.tag == "city_bkg")
+        {
+            minSpeed = 0.05f;
+            variability = 0.015f;
+        }
+        else if (gameObject.tag == "house")
+        {
+            minSpeed = 0.05f;
+            variability = 0.015f;
+        }
+        movementSpeed *= variability; // [0 - variability]
+        movementSpeed += minSpeed;    // [minSpeed - minSpeed+variability]
     }
 
     // Update is called once per frame
@@ -19,11 +38,5 @@ public class backgroundMove : MonoBehaviour
         float y = gameObject.transform.position.y;
         float z = gameObject.transform.position.z;
         gameObject.transform.position = new Vector3(x - movementSpeed, y, z);
-
-        // Outside bounds -> Destroy
-        if (x < -14f)
-        { 
-            Destroy(this);
-        }
     }
 }

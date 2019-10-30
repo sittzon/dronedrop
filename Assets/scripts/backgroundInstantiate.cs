@@ -4,34 +4,104 @@ using UnityEngine;
 
 public class backgroundInstantiate : MonoBehaviour
 {
-    public GameObject bkgPrefab;
-    int bkgLastCreated = 0;
+    public GameObject cityPrefab;
+    public GameObject cloudPrefab;
+    public GameObject housePrefab1;
+
+    private Vector2 cityStartPos = new Vector2(14f, -2.45f);
+    private Vector2 cloudStartPos = new Vector2(9.6f, 0f);
+    private Vector2 house1StartPos = new Vector2(11.2f, -0.5f);
+
+    int cityLastCreated;
+    int cloudLastCreated;
+    int house1LastCreated;
+
+    float halfScreenWidth;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject g = Instantiate(bkgPrefab, new Vector3(14f, -2.45f, 0f), Quaternion.identity);
-        Screen.SetResolution(1920, 1080, false);
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+        halfScreenWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
+
+        for (int i = 0; i < 15; ++i)
+        {
+            GameObject g = instantiateCloud();
+            g.transform.position += new Vector3((Random.value - 0.5f) * 4*halfScreenWidth, 0f, 0f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Instantiate new city background
-        float r1 = Random.value * 100f;
-        float r2 = Random.value;
-        if (r1 < 5f && bkgLastCreated <= 0)
+        if (Random.value < 0.05f && cityLastCreated <= 0)
         {
-            bkgLastCreated = 300;
-            GameObject g = Instantiate(bkgPrefab, new Vector3(14f, -2.45f, 0f), Quaternion.identity);
-            //Flip sprite?
-            if (r2 < 0.5f)
-            {
-                g.transform.localScale = new Vector3(-g.transform.localScale.x, g.transform.localScale.y, g.transform.localScale.z);
-            }
+            instantiateCity();
         }
-        --bkgLastCreated;
+        --cityLastCreated;
+
+        if (Random.value < 0.6f && cloudLastCreated <= 0)
+        {
+            instantiateCloud();
+        }
+        --cloudLastCreated;
+
+        if (Random.value < 0.1f && house1LastCreated <= 0)
+        {
+            instantiateHouse1();
+        }
+        --house1LastCreated;
+
+
+    }
+
+    private GameObject instantiateHouse1()
+    {
+        house1LastCreated = 500;
+        GameObject g = Instantiate(housePrefab1, house1StartPos, Quaternion.identity);
+        g.transform.position += new Vector3(0f, (Random.value - 0.5f) * 0.5f, 0f);
+        return g;
+    }
+
+    private GameObject instantiateCloud(Vector2 start)
+    {
+        cloudLastCreated = 15;
+        GameObject g = Instantiate(cloudPrefab, start, Quaternion.identity);
+        g.transform.position += new Vector3(0f, (Random.value - 0.3f) * 6, 0f);
+        //Flip sprite?
+        if (Random.value < 0.5f)
+        {
+            flipSpriteX();
+        }
+        return g;
+    }
+
+    private GameObject instantiateCloud()
+    {
+        return instantiateCloud(cloudStartPos);
+    }
+
+
+    private GameObject instantiateCity(Vector2 start)
+    {
+        cityLastCreated = 200;
+        GameObject g = Instantiate(cityPrefab, cityStartPos, Quaternion.identity);
+        //Flip sprite?
+        if (Random.value < 0.5f)
+        {
+            flipSpriteX();
+        }
+        return g;
+    }
+
+    private GameObject instantiateCity()
+    {
+        return instantiateCity(cityStartPos);
+    }
+
+    private void flipSpriteX()
+    {
+        gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
     }
 }

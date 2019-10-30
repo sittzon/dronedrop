@@ -10,8 +10,7 @@ public class droneControls : MonoBehaviour
     private SpriteRenderer sr;
     float horizontalAccelerationForceConstant = 7.0f;
     float verticalAccelerationForceConstant = 10.0f;
-    float decXForceConstant = -1.0f;
-    float rotationDecelerationConstant = 5f;
+    float maxVelXConstant = 3.0f;
     float halfScreenWidth;
     float halfScreenHeight;
 
@@ -26,82 +25,70 @@ public class droneControls : MonoBehaviour
         rb.freezeRotation = true;
     }
 
+    private void goUp()
+    {
+        rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
+    }
+
+    private void dropPresent()
+    {
+        Vector3 p = gameObject.transform.position;
+        Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
+        GameObject g = Instantiate(presentPrefab, new Vector3(p.x, p.y - 1.0f, p.z), Quaternion.identity);
+        g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Touch controls
         // Right side for up, left side for present drop
-
-        // Input.GetTouch(0).position returns position in device pixel coordinates, (0,0) in lower left corner
         for (int i = 0; i < Input.touchCount; ++i)
         {
-            Touch touch = Input.GetTouch(i);
-            Vector2 touchPos = touch.position;
-            print(touchPos);
+            Vector2 touchPos = Input.GetTouch(i).position;
 
             // If touch is on right side
             if (touchPos.x > Screen.currentResolution.width / 2)
             {
-                rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
+                goUp();
             }
             // If touch is on left side
-            else if (touchPos.x < Screen.currentResolution.width / 2)
+            else if (touchPos.x < Screen.currentResolution.width / 2 && Input.GetTouch(i).phase == TouchPhase.Began)
             {
-                Vector3 p = gameObject.transform.position;
-                Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
-                GameObject g = Instantiate(presentPrefab, new Vector3(p.x, p.y - 1.0f, p.z), Quaternion.identity);
-                g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
+                dropPresent();
             }
-
-            //// Touch controls or keyboard for debugging
-            //if (Input.touchCount == 1 || Input.GetKey(KeyCode.UpArrow))
-            //{
-            //    rb.AddForce(new Vector2(0.0f, verticalAccelerationForceConstant));
-            //}
-            //if (Input.touchCount >= 2 || Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    Vector3 pos = gameObject.transform.position;
-            //    Vector2 vel = gameObject.GetComponent<Rigidbody2D>().velocity;
-            //    GameObject g = Instantiate(presentPrefab, new Vector3(pos.x, pos.y-1.0f, pos.z), Quaternion.identity);
-            //    g.GetComponent<Rigidbody2D>().velocity = new Vector2(vel.x, vel.y);
-            //}
         }
 
-
-
-
-
-        // Left/Right input
+        // Left/Right tilt
         float accX = Input.acceleration.x;
-        rb.AddForce(new Vector2(horizontalAccelerationForceConstant*accX, 0.0f));
-        // Keyboard
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (rb.velocity.x < maxVelXConstant || rb.velocity.x > -maxVelXConstant)
         {
-            rb.AddForce(new Vector2(-horizontalAccelerationForceConstant, 0.0f));
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb.AddForce(new Vector2(horizontalAccelerationForceConstant, 0.0f));
+            rb.AddForce(new Vector2(horizontalAccelerationForceConstant * accX, 0.0f));
         }
 
+        // Rotate drone
+        rb.rotation = -rb.velocity.x * 2.0f;
 
-        // Deceleration
-        if (rb.GetRelativeVector(new Vector2(1.0f, 1.0f)).x > 0.0f)
-        {
-            rb.AddForce(new Vector2(decXForceConstant * accX, 0.0f));
+
+        // Keyboard controls for debugging
+        if (Debug.isDebugBuild) {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                goUp();
+            }
+            if (Input.GetKey(KeyCode.Space) && Input.anyKeyDown)
+            {
+                dropPresent();
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                rb.AddForce(new Vector2(-horizontalAccelerationForceConstant, 0.0f));
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rb.AddForce(new Vector2(horizontalAccelerationForceConstant, 0.0f));
+            }
         }
-
-        // Rotation Deceleration
-        //float r = rb.rotation;
-        //print("Rotation: " + r);
-        //if (r > 10f)
-        //{
-        //    rb.SetRotation(r - rotationDecelerationConstant);
-        //}
-        //else if (r < 10f)
-        //{
-        //    rb.SetRotation(r + rotationDecelerationConstant);
-        //}
 
         // Bounds check
         Vector2 pos = gameObject.transform.position;

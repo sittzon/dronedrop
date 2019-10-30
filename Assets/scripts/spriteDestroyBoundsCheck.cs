@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class spriteDestroyBoundsCheck : MonoBehaviour
 {
-    private Rigidbody2D rb;
     private SpriteRenderer sr;
     float halfScreenWidth;
     float halfScreenHeight;
@@ -12,12 +11,10 @@ public class spriteDestroyBoundsCheck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
         sr = gameObject.GetComponent<SpriteRenderer>();
 
         halfScreenWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
         halfScreenHeight = Camera.main.orthographicSize;
-
     }
 
     // Update is called once per frame
@@ -27,18 +24,22 @@ public class spriteDestroyBoundsCheck : MonoBehaviour
         Vector2 pos = gameObject.transform.position;
         if (pos.x + sr.bounds.extents.x < -halfScreenWidth) //Left
         {
+            print("Gameobject <" + gameObject.ToString() + "> out of Left bounds, destroying");
             Destroy(this);
         }
         else if (pos.x + sr.bounds.extents.x > halfScreenWidth) //Right
         {
+            print("Gameobject <" + gameObject.ToString() + "> out of Right bounds, destroying");
             Destroy(this);
         }
         if (pos.y + sr.bounds.extents.y > halfScreenHeight) //Top
         {
+            print("Gameobject <" + gameObject.ToString() + "> out of Top bounds, destroying");
             Destroy(this);
         }
         else if (pos.y - sr.bounds.extents.y < -halfScreenHeight) //Bottom
         {
+            print("Gameobject <" + gameObject.ToString() + "> out of Bottom bounds, destroying");
             Destroy(this);
         }
     }
