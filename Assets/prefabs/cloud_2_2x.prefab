@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2434843874852359986}
   - component: {fileID: 294959769016956439}
-  - component: {fileID: 1250433020933121769}
   - component: {fileID: -6597711244524916237}
+  - component: {fileID: -4855081068374542262}
   m_Layer: 0
   m_Name: cloud_2_2x
   m_TagString: cloud
@@ -83,18 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1250433020933121769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6677033157039995718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51c5013e92461453cbc7bf9c80cc3c32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-6597711244524916237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,5 +93,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc2b44548d16a490d9e94d6b1e1ec608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4855081068374542262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677033157039995718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb011b1152c14685aa6bb0d4def0633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

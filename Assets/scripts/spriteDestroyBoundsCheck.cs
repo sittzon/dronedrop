@@ -25,22 +25,22 @@ public class spriteDestroyBoundsCheck : MonoBehaviour
         if (pos.x + sr.bounds.extents.x < -halfScreenWidth) //Left
         {
             print("Gameobject <" + gameObject.ToString() + "> out of Left bounds, destroying");
-            Destroy(this);
+            Destroy(gameObject);
         }
         else if (pos.x + sr.bounds.extents.x > halfScreenWidth) //Right
         {
             print("Gameobject <" + gameObject.ToString() + "> out of Right bounds, destroying");
-            Destroy(this);
+            Destroy(gameObject);
         }
         if (pos.y + sr.bounds.extents.y > halfScreenHeight) //Top
         {
             print("Gameobject <" + gameObject.ToString() + "> out of Top bounds, destroying");
-            Destroy(this);
+            Destroy(gameObject);
         }
         else if (pos.y - sr.bounds.extents.y < -halfScreenHeight) //Bottom
         {
             print("Gameobject <" + gameObject.ToString() + "> out of Bottom bounds, destroying");
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

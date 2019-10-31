@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7267186177823366301}
   - component: {fileID: 982083982637455470}
   - component: {fileID: 7975763205697410400}
-  - component: {fileID: 8658776184027921659}
+  - component: {fileID: -1356651344720199770}
   m_Layer: 0
   m_Name: house_1_2x
   m_TagString: house
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2b44548d16a490d9e94d6b1e1ec608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8658776184027921659
+--- !u!114 &-1356651344720199770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431710497835692575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51c5013e92461453cbc7bf9c80cc3c32, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eb011b1152c14685aa6bb0d4def0633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2967040023822273637

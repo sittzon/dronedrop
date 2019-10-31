@@ -23,7 +23,7 @@ public class presentChimneyCollision : MonoBehaviour
             score += 1;
             drone.setScore(score);
             scoreText.text = "Points: " + score;
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

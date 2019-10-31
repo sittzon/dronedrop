@@ -28,14 +28,13 @@ public class BackgroundInstantiate : MonoBehaviour
         Application.targetFrameRate = 60;
         screenHalfWidth = Camera.main.orthographicSize * Screen.width / Screen.height;
 
-        sr = gameObject.GetComponent<SpriteRenderer>();
-        spriteHalfWidth = sr.sprite.bounds.extents.x;
-        spriteHalfHeight = sr.sprite.bounds.extents.y;
-
         for (int i = 0; i < 15; ++i)
         {
-            GameObject g = instantiateCloud();
-            g.transform.position += new Vector3((Random.value - 0.5f) * 4*screenHalfWidth, 0f, 0f);
+            GameObject go = instantiateCloud();
+            sr = go.GetComponent<SpriteRenderer>();
+            spriteHalfWidth = sr.sprite.bounds.extents.x;
+            spriteHalfHeight = sr.sprite.bounds.extents.y;
+            go.transform.position += new Vector3((Random.value - 0.5f) * 4*screenHalfWidth, 0f, 0f);
         }
     }
 
@@ -66,22 +65,22 @@ public class BackgroundInstantiate : MonoBehaviour
     private GameObject instantiateHouse1()
     {
         house1LastCreated = 500;
-        GameObject g = Instantiate(housePrefab1, house1StartPos, Quaternion.identity);
-        g.transform.position += new Vector3(0f, (Random.value - 0.5f) * 0.5f, 0f);
-        return g;
+        GameObject go = Instantiate(housePrefab1, house1StartPos, Quaternion.identity);
+        go.transform.position += new Vector3(0f, (Random.value - 0.5f) * 0.5f, 0f);
+        return go;
     }
 
     private GameObject instantiateCloud(Vector2 start)
     {
         cloudLastCreated = 15;
-        GameObject g = Instantiate(cloudPrefab, start, Quaternion.identity);
-        g.transform.position += new Vector3(0f, (Random.value - 0.3f) * 6, 0f);
+        GameObject go = Instantiate(cloudPrefab, start, Quaternion.identity);
+        go.transform.position += new Vector3(0f, (Random.value - 0.3f) * 6, 0f);
         //Flip sprite?
         if (Random.value < 0.5f)
         {
-            flipSpriteX();
+            flipSpriteX(go);
         }
-        return g;
+        return go;
     }
 
     private GameObject instantiateCloud()
@@ -93,13 +92,13 @@ public class BackgroundInstantiate : MonoBehaviour
     private GameObject instantiateCity(Vector2 start)
     {
         cityLastCreated = 200;
-        GameObject g = Instantiate(cityPrefab, cityStartPos, Quaternion.identity);
+        GameObject go = Instantiate(cityPrefab, cityStartPos, Quaternion.identity);
         //Flip sprite?
         if (Random.value < 0.5f)
         {
-            flipSpriteX();
+            flipSpriteX(go);
         }
-        return g;
+        return go;
     }
 
     private GameObject instantiateCity()
@@ -107,8 +106,8 @@ public class BackgroundInstantiate : MonoBehaviour
         return instantiateCity(cityStartPos);
     }
 
-    private void flipSpriteX()
+    private void flipSpriteX(GameObject go)
     {
-        gameObject.transform.localScale = new Vector3(-gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+        go.transform.localScale = new Vector3(-go.transform.localScale.x, go.transform.localScale.y, go.transform.localScale.z);
     }
 }
