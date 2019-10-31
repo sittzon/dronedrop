@@ -12,17 +12,17 @@ public class backgroundMove : MonoBehaviour
     {
         movementSpeed = Random.value;   // [0 - 1]
 
-        if (gameObject.tag == "cloud")
+        if (CompareTag("cloud"))
         {
             minSpeed = 0.05f;
             variability = 0.02f;
         }
-        else if (gameObject.tag == "city_bkg")
+        else if (CompareTag("city_bkg"))
         {
             minSpeed = 0.05f;
             variability = 0.015f;
         }
-        else if (gameObject.tag == "house")
+        else if (CompareTag("house"))
         {
             minSpeed = 0.05f;
             variability = 0.015f;
@@ -34,9 +34,9 @@ public class backgroundMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = gameObject.transform.position.x;
-        float y = gameObject.transform.position.y;
-        float z = gameObject.transform.position.z;
-        gameObject.transform.position = new Vector3(x - movementSpeed, y, z);
+        float x = transform.position.x;
+        float y = transform.position.y;
+        float z = transform.position.z;
+        transform.position = new Vector3(x - movementSpeed, y, z);
     }
 }
