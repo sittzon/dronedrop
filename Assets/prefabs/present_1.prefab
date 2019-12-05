@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1701879061307409153}
   - component: {fileID: 4908688831664011762}
   - component: {fileID: 7868087835047300605}
+  - component: {fileID: -5107808662182710923}
   m_Layer: 0
   m_Name: present_1
   m_TagString: Untagged
@@ -162,3 +163,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7a826e5e806479fbd1c9eece805db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChimneySmokeParticles: {fileID: 6590009923313240990, guid: 31150056f1c394d11a08fffe95999eec,
+    type: 3}
+--- !u!114 &-5107808662182710923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8479366047328370566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7c75119f72e48f1a5f864b6d29868f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PresentTrailObject: {fileID: 2060745100484259216, guid: d708d046b38744803b31040ff0c5b0e2,
+    type: 3}

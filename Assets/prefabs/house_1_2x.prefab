@@ -794,11 +794,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4459236635372738627}
     m_Modifications:
-    - target: {fileID: 1782846883255154438, guid: afbc60b7c383d4553806b3772c799084,
-        type: 3}
-      propertyPath: m_Name
-      value: chimney_1_01
-      objectReference: {fileID: 0}
     - target: {fileID: 461302079410770346, guid: afbc60b7c383d4553806b3772c799084,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -869,6 +864,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1782846883255154438, guid: afbc60b7c383d4553806b3772c799084,
+        type: 3}
+      propertyPath: m_Name
+      value: chimney_1_01
+      objectReference: {fileID: 0}
     - target: {fileID: 7361425947552526305, guid: afbc60b7c383d4553806b3772c799084,
         type: 3}
       propertyPath: m_SortingOrder
@@ -889,11 +889,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4459236635372738627}
     m_Modifications:
-    - target: {fileID: 1782846883255154438, guid: afbc60b7c383d4553806b3772c799084,
-        type: 3}
-      propertyPath: m_Name
-      value: chimney_1_01 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 461302079410770346, guid: afbc60b7c383d4553806b3772c799084,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -963,6 +958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782846883255154438, guid: afbc60b7c383d4553806b3772c799084,
+        type: 3}
+      propertyPath: m_Name
+      value: chimney_1_01 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afbc60b7c383d4553806b3772c799084, type: 3}

@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class presentChimneyCollision : MonoBehaviour
 {
+    public GameObject ChimneySmokeParticles;
+
     private Drone drone;
     private UnityEngine.UI.Text scoreText;
 
@@ -23,7 +23,11 @@ public class presentChimneyCollision : MonoBehaviour
             score += 1;
             drone.setScore(score);
             scoreText.text = "Points: " + score;
-            Destroy(gameObject);
+            Instantiate(ChimneySmokeParticles,
+                new Vector2(gameObject.transform.position.x, gameObject.transform.position.y),
+                Quaternion.identity);
+            Destroy(gameObject);            //Present
+            Destroy(collision.gameObject);  //Chimney
         }
     }
 }

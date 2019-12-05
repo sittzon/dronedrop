@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class backgroundMove : MonoBehaviour
 {
@@ -14,18 +12,18 @@ public class backgroundMove : MonoBehaviour
 
         if (CompareTag("cloud"))
         {
-            minSpeed = 0.05f;
-            variability = 0.02f;
+            minSpeed = 0.03f;
+            variability = 0.01f;
         }
         else if (CompareTag("city_bkg"))
         {
-            minSpeed = 0.05f;
-            variability = 0.015f;
+            minSpeed = 0.02f;
+            variability = 0.005f;
         }
         else if (CompareTag("house"))
         {
-            minSpeed = 0.05f;
-            variability = 0.015f;
+            minSpeed = 0.03f;
+            variability = 0.01f;
         }
         movementSpeed *= variability; // [0 - variability]
         movementSpeed += minSpeed;    // [minSpeed - minSpeed+variability]
